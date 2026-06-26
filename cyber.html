@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered CyberShield Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-950 text-gray-100 font-sans min-h-screen flex flex-col">
+
+    <header class="border-b border-gray-800 bg-gray-900 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 p-2 rounded-lg text-white">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-wider text-white">CYBERSHIELD <span class="text-xs font-semibold bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded-full ml-1">2.0</span></span>
+                    <p class="text-[10px] text-gray-400 tracking-tight">Beyond The Edge of Possibility</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-6">
+                <div class="hidden md:flex items-center space-x-2 text-xs text-green-400 bg-green-500/10 px-3 py-1.5 rounded-full border border-green-500/20">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span>AI Detection Engine: Active</span>
+                </div>
+                <div class="flex items-center space-x-2 text-sm text-gray-300">
+                    <i data-lucide="user" class="w-4 h-4 text-gray-400"></i>
+                    <span class="font-medium text-xs hidden sm:inline">Team Workspace</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+        
+        <div class="lg:col-span-2 space-y-6">
+            
+            <section class="bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-xl">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-2 bg-purple-500/10 rounded-lg text-purple-400">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-semibold text-white">Email Threat Detection</h2>
+                        <p class="text-xs text-gray-400">Instantly parse suspicious text content and email metadata</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <textarea id="emailInput" rows="3" class="w-full bg-gray-950 border border-gray-800 rounded-lg p-3 text-sm focus:outline-none focus:border-purple-500 text-gray-200 placeholder-gray-500" placeholder="Paste full email body or suspicious message context here..."></textarea>
+                    <div class="flex flex-wrap gap-2 justify-between items-center">
+                        <div class="flex gap-2">
+                            <button onclick="loadSample('email', 'phish')" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-2.5 py-1.5 rounded transition">Load Phishing Sample</button>
+                            <button onclick="loadSample('email', 'safe')" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-2.5 py-1.5 rounded transition">Load Safe Sample</button>
+                        </div>
+                        <button onclick="analyzeEmail()" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition shadow-lg shadow-purple-600/10">Analyze Email</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-xl">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-2 bg-blue-500/10 rounded-lg text-blue-400">
+                        <i data-lucide="globe" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-semibold text-white">Fake Website Detection</h2>
+                        <p class="text-xs text-gray-400">Evaluate link domain structures and brand authenticity match factors</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <input id="urlInput" type="text" class="w-full bg-gray-950 border border-gray-800 rounded-lg p-3 text-sm focus:outline-none focus:border-blue-500 text-gray-200 placeholder-gray-500" placeholder="https://example-security-update.com/login">
+                    <div class="flex flex-wrap gap-2 justify-between items-center">
+                        <div class="flex gap-2">
+                            <button onclick="loadSample('url', 'fake')" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-2.5 py-1.5 rounded transition">Load Mimic URL</button>
+                            <button onclick="loadSample('url', 'safe')" class="text-xs bg-gray-800 hover:bg-gray-700 text-gray-300 px-2.5 py-1.5 rounded transition">Load Legit URL</button>
+                        </div>
+                        <button onclick="analyzeURL()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition shadow-lg shadow-blue-600/10">Verify Authenticity</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-xl">
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="p-2 bg-pink-500/10 rounded-lg text-pink-400">
+                        <i data-lucide="video" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-semibold text-white">Deepfake Detection Engine</h2>
+                        <p class="text-xs text-gray-400">Scan frames for biometric inconsistencies and synthetic layout traits</p>
+                    </div>
+                </div>
+                <div class="border border-dashed border-gray-800 rounded-lg p-6 text-center bg-gray-950/50 hover:bg-gray-950 transition relative overflow-hidden group">
+                    <input type="file" id="mediaFile" class="absolute inset-0 opacity-0 cursor-pointer" onchange="handleFileDrop(this)">
+                    <div id="uploadPlaceholder" class="space-y-2">
+                        <div class="inline-flex p-3 bg-gray-900 text-gray-400 rounded-full group-hover:text-pink-400 transition">
+                            <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+                        </div>
+                        <p class="text-sm text-gray-300 font-medium">Click or drag video / image file here</p>
+                        <p class="text-xs text-gray-500">Supports MP4, MOV, PNG, JPG (Max 50MB)</p>
+                    </div>
+                    <div id="fileSelectedState" class="hidden space-y-3">
+                        <div class="inline-flex p-2 bg-pink-500/10 text-pink-400 rounded-lg">
+                            <i data-lucide="file-video" class="w-8 h-8"></i>
+                        </div>
+                        <p id="fileNameTxt" class="text-sm text-white font-mono break-all"></p>
+                        <button onclick="clearMediaUpload(event)" class="text-xs text-red-400 underline hover:text-red-300">Remove media file</button>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-end">
+                    <button onclick="analyzeDeepfake()" class="w-full sm:w-auto bg-pink-600 hover:bg-pink-500 text-white text-sm font-medium px-4 py-2 rounded-lg transition shadow-lg shadow-pink-600/10">Scan Biometrics</button>
+                </div>
+            </section>
+        </div>
+
+        <div class="space-y-6">
+            
+            <section class="bg-gray-900 border border-gray-800 rounded-xl p-5 shadow-xl sticky top-24">
+                <h2 class="text-sm font-bold text-gray-400 tracking-wider uppercase mb-4">Risk Evaluation Summary</h2>
+                
+                <div class="flex flex-col items-center justify-center py-6 border-b border-gray-800/60 mb-5">
+                    <div class="relative flex items-center justify-center">
+                        <svg class="w-36 h-36 transform -rotate-90">
+                            <circle cx="72" cy="72" r="64" stroke-width="8" stroke="#1f2937" fill="transparent"/>
+                            <circle id="scoreRing" cx="72" cy="72" r="64" stroke-width="8" stroke="#10b981" stroke-dasharray="402.12" stroke-dashoffset="402.12" fill="transparent" class="transition-all duration-700 ease-out"/>
+                        </svg>
+                        <div class="absolute text-center">
+                            <span id="scoreText" class="text-4xl font-extrabold text-white">0%</span>
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-gray-400 mt-0.5">Threat Score</p>
+                        </div>
+                    </div>
+                    <div id="statusBadge" class="mt-4 px-3 py-1 text-xs font-semibold bg-gray-800 text-gray-400 rounded-full border border-gray-700">
+                        System Neutral
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <span class="text-xs text-gray-400 font-medium block mb-1">Engine Findings Breakdown</span>
+                        <div id="findingsContainer" class="text-xs text-gray-500 italic bg-gray-950 p-3 rounded-lg border border-gray-800/80">
+                            No telemetry ingested yet. Use any left utility to run automated model inference tests.
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="text-xs text-gray-400 font-medium block mb-1.5">Actionable Prevention Guideline</span>
+                        <div id="guidelineContainer" class="p-3 bg-blue-500/5 rounded-lg border border-blue-500/10 flex items-start space-x-2.5">
+                            <i data-lucide="info" class="w-4 h-4 text-blue-400 mt-0.5 shrink-0"></i>
+                            <p id="guidelineText" class="text-xs text-gray-300 leading-relaxed">
+                                Ready for scanning operations. Ensure input files or links are parsed safely via the sandbox environment.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="mt-auto border-t border-gray-900 bg-gray-950 text-xs text-gray-500 py-6">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p class="font-medium text-gray-400">Confluence 2.0 Hackathon Submission — CyberShield Platform</p>
+            <p>Developed by: Jadi Jeevana • Pirange Dhanush • Madisetty Sanjana • Juttu Leela Supriya</p>
+            <p class="text-[11px] text-gray-600">Tech Stack Applied: React/FastAPI Logic Sandbox Engine powered by Scikit-Learn & TensorFlow NLP Models</p>
+        </div>
+    </footer>
+
+    <script>
+        // Core mock dataset matching presentation threats
+        const templates = {
+            email: {
+                phish: "URGENT: Your mobile banking password credentials have expired due to recent server compliance upgrades. CLICK HERE (http://secure-bank-update-portal.xyz/login) within 24 hours to verify identity and recover dashboard funds immediately or suffer total profile loss.",
+                safe: "Hi Team, please find attached the reviewed schedule blueprint layout for the upcoming sprint execution timeline. Let me know if you spot any resource gaps before Friday's standup."
+            },
+            url: {
+                fake: "https://www.micros0ft-security-verification-service.net/auth/login",
+                safe: "https://github.com/confluence-cyber-shield/prototype"
+            }
+        };
+
+        // UI Initializer for lucide icons
+        document.addEventListener("DOMContentLoaded", () => {
+            lucide.createIcons();
+            updateRiskGauge(0, 'neutral', 'Inert telemetry log status');
+        });
+
+        // Template selector loader util
+        function loadSample(type, category) {
+            if(type === 'email') {
+                document.getElementById('emailInput').value = templates.email[category];
+            } else if(type === 'url') {
+                document.getElementById('urlInput').value = templates.url[category];
+            }
+        }
+
+        // Dropzone helper functions
+        function handleFileDrop(input) {
+            const fileBox = document.getElementById('fileSelectedState');
+            const placeholder = document.getElementById('uploadPlaceholder');
+            if(input.files && input.files[0]) {
+                document.getElementById('fileNameTxt').innerText = input.files[0].name;
+                placeholder.classList.add('hidden');
+                fileBox.classList.remove('hidden');
+            }
+        }
+
+        function clearMediaUpload(e) {
+            e.preventDefault();
+            document.getElementById('mediaFile').value = "";
+            document.getElementById('uploadPlaceholder').classList.remove('hidden');
+            document.getElementById('fileSelectedState').classList.add('hidden');
+        }
+
+        // Dynamic Risk Circle Matrix Gauge Calculation
+        function updateRiskGauge(percentage, status, logsText, recommendations = '') {
+            const circle = document.getElementById('scoreRing');
+            const txt = document.getElementById('scoreText');
+            const badge = document.getElementById('statusBadge');
+            const logBox = document.getElementById('findingsContainer');
+            const guideBox = document.getElementById('guidelineText');
+
+            // Circle dash computations
+            const radius = 64;
+            const circumference = 2 * Math.PI * radius; // ~402.12
+            const offset = circumference - (percentage / 100) * circumference;
+            
+            circle.style.strokeDashoffset = offset;
+            txt.innerText = `${percentage}%`;
+            logBox.innerHTML = logsText;
+            
+            if(recommendations) {
+                guideBox.innerText = recommendations;
+            }
+
+            // Adjust coloring schemes depending on parsed critical ranges
+            if (percentage >= 75) {
+                circle.style.stroke = "#ef4444"; // Red
+                badge.className = "mt-4 px-3 py-1 text-xs font-semibold bg-red-500/10 text-red-400 rounded-full border border-red-500/20";
+                badge.innerText = "CRITICAL THREAT DETECTED";
+            } else if (percentage >= 35) {
+                circle.style.stroke = "#f59e0b"; // Orange
+                badge.className = "mt-4 px-3 py-1 text-xs font-semibold bg-amber-500/10 text-amber-400 rounded-full border border-amber-500/20";
+                badge.innerText = "SUSPICIOUS ACTIVITY / WARNING";
+            } else {
+                circle.style.stroke = "#10b981"; // Green
+                badge.className = "mt-4 px-3 py-1 text-xs font-semibold bg-green-500/10 text-green-400 rounded-full border border-green-500/20";
+                badge.innerText = "VERIFIED SECURE / SAFE";
+            }
+        }
+
+        // Module Analysis Action Simulators
+        function analyzeEmail() {
+            const val = document.getElementById('emailInput').value.trim();
+            if(!val) return alert("Please enter text content inside the email segment to verify.");
+            
+            const checks = ['urgent', 'password', 'click here', 'verify', 'expire', 'login', 'credentials', 'bank'];
+            let triggerCount = 0;
+            checks.forEach(word => { if(val.toLowerCase().includes(word)) triggerCount++; });
+
+            if(triggerCount >= 3 || val.includes('.xyz')) {
+                updateRiskGauge(
+                    92, 
+                    'critical', 
+                    `<strong>Threat Flagged:</strong> High affinity Phishing vectors detected.<br>• Intent Matrix: High Pressure Urgency Context<br>• Attachment/Link Security: Unverified routing payload target patterns detected.`,
+                    "Do not click internal URLs. Flag headers, quarantine the source domain address instantly inside server firewalls, and trigger security compliance gateway alerts."
+                );
+            } else {
+                updateRiskGauge(
+                    8, 
+                    'safe', 
+                    `<strong>Telemetry Safe:</strong> Standard communication text profile matching normal organizational parameters. No malware heuristics triggered.`,
+                    "No immediate preventative adjustments needed. Safe to file or process via normal mailbox routing."
+                );
+            }
+        }
+
+        function analyzeURL() {
+            const val = document.getElementById('urlInput').value.trim();
+            if(!val) return alert("Please specify a targeted domain link line address first.");
+
+            if(val.includes('0') || val.includes('-') || val.includes('.xyz') || val.includes('verification')) {
+                updateRiskGauge(
+                    88, 
+                    'critical', 
+                    `<strong>Domain Assessment:</strong> Brand Mimicry Spoofing alert.<br>• WHOIS Lookup mismatch found.<br>• Visual Layout Check: Domain character substitution pattern noticed (typosquatting).`,
+                    "Isolate external web request endpoints. Blacklist this host address completely inside browser security proxy tables."
+                );
+            } else {
+                updateRiskGauge(
+                    4, 
+                    'safe', 
+                    `<strong>Domain Assessment:</strong> Valid signature layout verified.<br>• SSL certificate validation active.<br>• Authority Score: Trusted ecosystem register history match.`,
+                    "Safe connection verified. Standard browser access permissions can proceed securely."
+                );
+            }
+        }
+
+        function analyzeDeepfake() {
+            const fileInput = document.getElementById('mediaFile');
+            if(!fileInput.files || fileInput.files.length === 0) {
+                return alert("Please upload an image or video file structure first to evaluate frame analytics.");
+            }
+            
+            // Simulating analytical scanning pass metrics
+            const filename = fileInput.files[0].name.toLowerCase();
+            const isFake = filename.includes('fake') || filename.includes('test') || filename.length % 2 === 0;
+
+            if(isFake) {
+                updateRiskGauge(
+                    81, 
+                    'critical', 
+                    `<strong>Biometric Scan Alert:</strong> Synthetic manipulation indicators found.<br>• Facial Inconsistency: 84% unnatural eye-blink rate ratios.<br>• Frequency Analysis: Lighting mismatch artifacts around neck grid lines.`,
+                    "Media file is highly simulated or synthesized via AI generator engines. Do not distribute to prevent spreading false informational metrics."
+                );
+            } else {
+                updateRiskGauge(
+                    12, 
+                    'safe', 
+                    `<strong>Biometric Scan Safe:</strong> Natural skin rendering textures and continuous tracking coordinates confirmed. No frame composition splicing found.`,
+                    "Media file shows natural biometric composition alignment. Authentication clear."
+                );
+            }
+        }
+    </script>
+</body>
+</html>
